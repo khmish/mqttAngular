@@ -15,10 +15,15 @@ export class AppComponent {
   msg: any;
   isConnected: boolean = false;
   @ViewChild('msglog') msglog: ElementRef;
+  emptyP=["../assets/parkingC11.jpg","../assets/parkingC12.jpg","../assets/parkingC21.jpg","../assets/parkingC22.jpg"];
+  pakinglot=[this.emptyP[0],this.emptyP[1],this.emptyP[2],this.emptyP[3]];
+  parkingImg=["../assets/parkingTopE.jpg","../assets/parkingTopE1.jpg","../assets/parkingButtomE.jpg","../assets/parkingButtomE1.jpg"];
 
   constructor(private _mqttService: MqttService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.subscribePark("park");
+  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
@@ -47,5 +52,27 @@ export class AppComponent {
 
   clear(): void {
     this.msglog.nativeElement.innerHTML = '';
+  }
+
+  subscribePark(tp): void {
+    console.log('inside subscribe new topic')
+    this.subscription = this._mqttService.observe(tp).subscribe((message: IMqttMessage) => {
+      this.msg = message;
+      console.log('msg: ', message)
+      this.logMsg('Message: ' + message.payload.toString() + '<br> for topic: ' + message.topic);
+      if(message.payload.toString()=="c11 1"){
+        this.pakinglot[0]=this.parkingImg[0]
+      }
+      else if(message.payload.toString()=="c11 0"){
+        this.pakinglot[0]=this.emptyP[0]
+      }
+      if(message.payload.toString()=="c12 1"){
+        this.pakinglot[1]=this.parkingImg[1]
+      }
+      else if(message.payload.toString()=="c12 0"){
+        this.pakinglot[1]=this.emptyP[1]
+      }
+    });
+    this.logMsg('subscribed to topic: ' + tp)
   }
 }
