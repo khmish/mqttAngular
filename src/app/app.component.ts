@@ -72,6 +72,18 @@ export class AppComponent {
       else if(message.payload.toString()=="c12 0"){
         this.pakinglot[1]=this.emptyP[1]
       }
+      if(message.payload.toString()=="c21 1"){
+        this.pakinglot[2]=this.parkingImg[3]
+      }
+      else if(message.payload.toString()=="c21 0"){
+        this.pakinglot[2]=this.emptyP[2]
+      }
+      if(message.payload.toString()=="c22 1"){
+        this.pakinglot[3]=this.parkingImg[2]
+      }
+      else if(message.payload.toString()=="c22 0"){
+        this.pakinglot[3]=this.emptyP[3]
+      }
     });
     this.logMsg('subscribed to topic: ' + tp)
   }
