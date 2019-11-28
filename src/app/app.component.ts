@@ -59,7 +59,7 @@ export class AppComponent {
     this.subscription = this._mqttService.observe(tp).subscribe((message: IMqttMessage) => {
       this.msg = message;
       console.log('msg: ', message)
-      this.logMsg('Message: ' + message.payload.toString() + '<br> for topic: ' + message.topic);
+      // this.logMsg('Message: ' + message.payload.toString() + '<br> for topic: ' + message.topic);
       if(message.payload.toString()=="c11 1"){
         this.pakinglot[0]=this.parkingImg[0]
       }
