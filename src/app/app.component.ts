@@ -11,6 +11,15 @@ import { IMqttMessage, MqttService } from 'ngx-mqtt';
 export class AppComponent {
 
   private subscription: Subscription;
+
+  parkWidth=250;
+  myStyles = {
+    'width': this.parkWidth+'px',
+    };
+    myStyles1 = {
+      'width': window.innerWidth+'px',
+      };
+
   topicname: any;
   msg: any;
   isConnected: boolean = false;
@@ -22,6 +31,35 @@ export class AppComponent {
   constructor(private _mqttService: MqttService) { }
 
   ngOnInit(): void {
+    let w = window.innerWidth || document.documentElement.clientWidth;
+    console.log(w);
+    this.myStyles1.width= (w*0.52)+"px";
+    if(w<=480)
+    {
+      let factor1=0.35;
+      this.parkWidth=this.parkWidth*factor1;
+      this.myStyles.width=this.parkWidth+"px";
+      this.myStyles1.width= (w*0.9)+"px";
+     
+      
+    }
+    else if(w<=780)
+    {
+      let factor1=0.7;
+      this.parkWidth=this.parkWidth*factor1;
+      this.myStyles.width=this.parkWidth+"px";
+      this.myStyles1.width= (w*0.9)+"px";
+     
+      
+    }
+    else if(w<=1380)
+    {
+      let factor1=0.9;
+      this.parkWidth=this.parkWidth*factor1;
+      this.myStyles.width=this.parkWidth+"px";
+      this.myStyles1.width= (w*0.9)+"px";
+      
+    }
     this.subscribePark("park");
   }
 
