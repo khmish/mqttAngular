@@ -10,8 +10,11 @@ import {
 } from 'ngx-mqtt';
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
-  hostname: 'localhost',
-  port: 9001,
+  hostname: 'tailor.cloudmqtt.com',
+  username: "izgahocz",
+  password:"uMY3zxCSilQk",
+  port: 33987,
+  protocol: "wss",
   path: '/'
 }
 
